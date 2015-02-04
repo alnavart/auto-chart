@@ -1,0 +1,46 @@
+plugins {
+    id "org.grooscript.conversion" version "1.0.0"
+    id "org.ajoberstar.github-pages" version "0.13.0-milestone.1"
+}
+
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'org.grooscript.conversion'
+apply plugin: 'org.ajoberstar.github-pages'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    groovyVersion = '2.3.7'
+}
+
+dependencies {
+    compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+    compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
+
+    compile ('org.grooscript:grooscript:1.0.0') {
+        exclude module: 'groovy'
+    }
+    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+        exclude module: 'groovy-all'
+    }
+}
+
+grooscript {
+    source = ['src/main/groovy/chart']
+    destination = 'src/main/webapp/js/chart'
+    classPath = ['src/main/groovy']
+    initialText = '//Grooscript converted file @author: Alberto Navarrete'
+}
+
+import org.ajoberstar.grgit.*
+task cloneNVD3Repo << {
+    Grgit.clone(dir: file('src/main/webapp/js/lib/nvd3'), uri: 'git@github.com:liquidpele/nvd3.git')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}

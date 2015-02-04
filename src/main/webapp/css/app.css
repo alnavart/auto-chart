@@ -1,0 +1,28 @@
+body {
+    background-color: rgba(60, 60, 60, 0.95);
+}
+svg {
+    display: block;
+    float: left;
+}
+
+.squareChart {
+    height: 300px;
+    width: 300px;
+}
+
+.rectangularChart {
+    height: 300px;
+    width: 400px;
+}
+
+.nvd3.nv-pie.nv-chart-donut2 .nv-pie-title {
+    font-size: 18px;
+    fill: rgba(70, 107, 168, 0.78);
+}
+
+.nvd3.nv-pie.nv-chart-donut1 .nv-pie-title {
+    font-size: 18px;
+    opacity: 0.4;
+    fill: rgba(224, 116, 76, 0.91);
+}
